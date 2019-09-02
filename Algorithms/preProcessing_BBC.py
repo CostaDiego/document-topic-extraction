@@ -114,3 +114,22 @@ def removeStopWords(dataFile, minSize = 1, verbose = False):
     dataFile['tokens'] = dataFile['tokens'].map(lambda tokens: [token.lower() for token in tokens if token.isalpha() 
                                                     and token.lower() not in stopwords and len(token)>minSize])
     return dataFile
+
+def Bi_n_TrigramModel(dataFile, min_cnt = 1, verbose = False):
+    if verbose is True:
+        print('Getting tokens From data file and converting into a list of tokens.')
+    tokens = dataFile['tokens'].tolist()
+
+    if verbose is True:
+        print('Building the Bigram Model')
+    bigram_model = Phrases(tokens)
+
+    if verbose is True:
+        print('Building the Trigram Model')
+    trigram_model = Phrases(bigram_model[tokens], min_cnt)
+
+    if verbose is True:
+        print('Importing the Trigram Model and converting into list')
+    tokens = list(trigram_model[bigram_model[tokens]])
+
+    return tokens
