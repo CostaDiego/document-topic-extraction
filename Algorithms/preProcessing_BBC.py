@@ -6,6 +6,7 @@ from langdetect import detect
 from tqdm import tqdm_notebook
 from itertools import chain
 from gensim.models import Phrases
+from gensim import corpora, models
 
 tqdm_notebook().pandas()
 
@@ -133,3 +134,20 @@ def Bi_n_TrigramModel(dataFile, min_cnt = 1, verbose = False):
     tokens = list(trigram_model[bigram_model[tokens]])
 
     return tokens
+
+def generateDictionary(tokens, min_thld, verbose = False):
+    if verbose is True:
+        print('Generating the Ditionary.')
+    diction = corpora.Dictionary(tokens)
+
+    if verbose is True:
+        print('Filtering dictionary using the minimun threshold: {}'.format(min_thld))
+    diction.filter_extremes(no_below = min_thld)
+
+    return diction
+
+def generateBOW(diction, tokens, verbose = False):
+     if verbose is True:
+         print('Generating Bag Of Words.')
+     bow = [diction.doc2bow(token) for token in tokens]
+     return bow
