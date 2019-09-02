@@ -7,6 +7,7 @@ from tqdm import tqdm_notebook
 from itertools import chain
 from gensim.models import Phrases
 from gensim import corpora, models
+import numpy, time
 
 tqdm_notebook().pandas()
 
@@ -151,3 +152,29 @@ def generateBOW(diction, tokens, verbose = False):
          print('Generating Bag Of Words.')
      bow = [diction.doc2bow(token) for token in tokens]
      return bow
+
+def trainModel(bow, dictionary, numTopics = None, numPasses = None, verbose = False):  
+
+    if verbose is True:
+        if numTopics is None:
+            print('Please inform a valid number of topics.')
+        if dictionary is None:
+            print('Please inform a valid dictionary.')    
+        if numPasses is None:
+            print('Please inform a valid dictionary.')
+
+        print('Trainning LDA model using the inputed BOW and Dictionary.')
+        print('Parameters: Topics: {}, Passes: {}'.format(numTopics,numPasses))
+
+    numpy.random.seed(int(time.time()))
+
+    modelLDA = models.LdaModel(
+        bow,
+        num_topics= numTopics,
+        id2word= dictionary,
+        passes= numPasses,
+        alpha= [0.01]*numTopics,
+        eta= [0.01]*len(dictionary.keys())
+    )
+
+    return modelLDA
