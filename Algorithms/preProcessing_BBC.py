@@ -1,12 +1,16 @@
 import pandas as pd
 from nltk import sent_tokenize, word_tokenize, pos_tag
+from nltk.corpus import wordnet, stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
-from nltk.corpus import wordnet
 from langdetect import detect
 from tqdm import tqdm_notebook
-# import gensim
+from itertools import chain
+from gensim.models import Phrases
 
 tqdm_notebook().pandas()
+
+stopwords_verbs = ['say', 'get', 'go', 'know', 'may', 'need', 'like', 'make', 'see', 'want', 'come', 'take', 'use', 'would', 'can']
+stopwords_other = ['one', 'mr', 'bbc', 'image', 'getty', 'de', 'en', 'caption', 'also', 'copyright', 'something']
 
 def import_files (path, preCleaning = True, dropna = 'index', verbose = False):
     data = pd.read_csv(path)
@@ -90,4 +94,23 @@ def lemmatizing(dataFile, verbose = False):
         for tokens_POS in list_tokens_POS
     ]
 )
+    return dataFile
+
+def getStopWords(verbs = stopwords_verbs, others = stopwords_other):
+    FinalStopwords = stopwords.words('english') + verbs + others
+
+    return FinalStopwords
+
+def removeStopWords(dataFile, minSize = 1, verbose = False):
+    if verbose is True:
+        print('Importing Stop words')
+    
+    stopwords = getStopWords()
+
+    if verbose is True:
+        print('Cleaning the tokens from {} using list of stopwords'.format(dataFile))
+
+    dataFile['tokens'] = dataFile['tokens_words_lemmatized'].map(lambda sentences: list(chain.from_iterable(sentences)))
+    dataFile['tokens'] = dataFile['tokens'].map(lambda tokens: [token.lower() for token in tokens if token.isalpha() 
+                                                    and token.lower() not in stopwords and len(token)>minSize])
     return dataFile
