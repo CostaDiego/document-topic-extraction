@@ -56,11 +56,11 @@ python run.py  --document Document.txt --model models/LDAmodelExtended.pkl --dic
 ### Customized demo
 
 To run a customized demo of the algorith you will chage the inputed params:
-    --document: to input a different document to infer.
-    --model: to input a different trained model
-    --dictionary: to input a different dictionary.
+- --document: to input a different document to infer.
+- --model: to input a different trained model
+- --dictionary: to input a different dictionary.
 
 In case of a non informed param the standard params will be assumed, wich is the same as the Demo Test example:
-    --document: Document.txt
-    --model: models/LDAmodelExtended.pkl
-    --dictionary: models/dictionary.dict
+- --document: Document.txt
+- --model: models/LDAmodelExtended.pkl
+- --dictionary: models/dictionary.dict
