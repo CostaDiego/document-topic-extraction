@@ -1,0 +1,7 @@
+pickle
+pandas
+tqdm
+nltk
+gensim
+langdetect
+numpy
