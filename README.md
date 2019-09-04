@@ -7,7 +7,6 @@ This works shows the approch used to solve the topic extraction problem using an
 ### Dependencies
 
 You will need the following dependencies:
-
 - python 3
 - pip3. To install the needed modules.
 - anaconda or miniconda. (Optional for environment creation and management)
@@ -25,7 +24,7 @@ pip3 install -r requirements.txt
 To train this model, three datasets were used. All three were downloaded from [Kaggle](https://kaggle.com) website.
 
 TED talks: Transcription of some TED speechs.
-see:https://www.kaggle.com/rounakbanik/ted-talks
+see: https://www.kaggle.com/rounakbanik/ted-talks
 
 Topics: A dataset for topics extraction.
 see: https://www.kaggle.com/luisfredgs/topics-classification
