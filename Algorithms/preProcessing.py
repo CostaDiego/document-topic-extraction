@@ -9,6 +9,9 @@ from gensim.models import Phrases
 from gensim import corpora, models
 import numpy, time
 
+import nltk
+nltk.download('wordnet')
+
 tqdm_notebook().pandas()
 
 stopwords_verbs = ['say', 'get', 'go', 'know', 'may', 'need',
