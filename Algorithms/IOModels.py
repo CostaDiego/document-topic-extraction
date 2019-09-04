@@ -30,6 +30,6 @@ def load(path, verbose = False):
         return obj
 
     except pkl.PickleError:
-        print('An Error occured during saving.')
+        print('An Error occured during loading.')
 
     
