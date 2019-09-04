@@ -14,21 +14,35 @@ tqdm_notebook().pandas()
 stopwords_verbs = ['say', 'get', 'go', 'know', 'may', 'need', 'like', 'make', 'see', 'want', 'come', 'take', 'use', 'would', 'can']
 stopwords_other = ['one', 'mr', 'bbc', 'image', 'getty', 'de', 'en', 'caption', 'also', 'copyright', 'something']
 
-def import_files (path, preCleaning = True, dropna = 'index', verbose = False):
-    data = pd.read_csv(path)
-    
-    if verbose is True:
-        print("Input Format:")
-        print('Rows: {}, Columns: {}\n'.format(data.shape[0], data.shape[1]))
+def import_files (path, target, preCleaning = True, dropna = 'index', verbose = False):
+    if len(path) == len(target):
+        data = pd.DataFrame(columns=['articles'])
+        preData = []
+        for i in range(len(path)):
+            if verbose is True:
+                print("Loading the dataset {}.\n".format(i))
+            datatmp = pd.read_csv(path[i])
+            
+            if verbose is True:
+                print("Input Format:")
+                print('Rows: {}, Columns: {}.\n'.format(datatmp.shape[0], datatmp.shape[1]))
 
-    if preCleaning is True:
-        data = data.dropna(dropna).reset_index(drop=True)
- 
+            if preCleaning is True:
+                datatmp = datatmp.dropna(dropna).reset_index(drop=True)
+        
+                if verbose is True:
+                    print("Pre cleaning format:")
+                    print('Rows: {}, Columns: {}'.format(datatmp.shape[0], datatmp.shape[1]))
+            preData.append(datatmp[str(target[i])])
+
         if verbose is True:
-            print("Pre cleaning format:")
-            print('Rows: {}, Columns: {}'.format(data.shape[0], data.shape[1]))
+            print("\nRemoving unwanted information using targets.")
+        data['articles'] = pd.concat(preData, ignore_index=True)  
 
-    return data
+        return data
+
+    else:
+        print("The number of datasets does not matches the number of targets")
 
 def language_detection(dataFile, verbose = False):
     dataFile['lang']  = dataFile.articles.progress_map(detect)
