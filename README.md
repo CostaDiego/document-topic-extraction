@@ -64,3 +64,10 @@ In case of a non informed param the standard params will be assumed, wich is the
 - --document: Document.txt
 - --model: models/LDAmodelExtended.pkl
 - --dictionary: models/dictionary.dict
+
+## References
+
+During the development of this project, the following repositories were used as source of knowledge and inspiration:
+
+- [Medium Articles](https://github.com/FelixChop/MediumArticles)
+- [LDA Newsgroup](https://github.com/priya-dwivedi/Deep-Learning/blob/master/topic_modeling/LDA_Newsgroup.ipynb)
