@@ -35,7 +35,7 @@ def load(path, verbose = False):
     except pkl.PickleError:
         print('An Error occured during loading.')
 
-def infer(document, model, dictionary, numb_topics = 12):
+def infer(document, model, dictionary, numb_topics = 14):
     print("Loading the Document from path: {}".format(str(document)))
     file = open(str(document), "r")
     doc = file.read()

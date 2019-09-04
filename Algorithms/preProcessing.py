@@ -15,7 +15,7 @@ stopwords_verbs = ['say', 'get', 'go', 'know', 'may', 'need',
 'like', 'make', 'see', 'want', 'come', 'take', 'use', 'would', 'can']
 stopwords_other = ['one', 'much','even', 'mr', 'bbc', 'image',
 'getty', 'de', 'en', 'caption', 'also', 'copyright', 'something',
-'well', 'plus', 'really']
+'well', 'plus', 'really', 'actually']
 
 def import_files (path, target, preCleaning = True, dropna = 'index', verbose = False):
     if len(path) == len(target):
